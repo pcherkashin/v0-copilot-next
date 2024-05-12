@@ -16,6 +16,7 @@ import Header from '@/components/header'
 import Sidebar from '@/components/sidebar'
 import PreviewScreen from '@/components/preview-screen'
 import { Input } from '@/components/ui/input'
+import 'tailwindcss/tailwind.css'
 
 export default function Home() {
   const [code, setCode] = useState<string[]>([
