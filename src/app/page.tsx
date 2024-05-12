@@ -17,6 +17,7 @@ import Sidebar from '@/components/sidebar'
 import PreviewScreen from '@/components/preview-screen'
 import { Input } from '@/components/ui/input'
 import 'tailwindcss/tailwind.css'
+import { ClipboardCopyIcon } from '@heroicons/react/outline'
 
 export default function Home() {
   const [code, setCode] = useState<string[]>([
@@ -49,7 +50,14 @@ export default function Home() {
       },
     ],
   })
-
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(codeToDisplay)
+      console.log('Code copied to clipboard')
+    } catch (err) {
+      console.error('Failed to copy text: ', err)
+    }
+  }
   const context = useCopilotContext()
 
   return (
@@ -97,6 +105,12 @@ export default function Home() {
               You can use the following code to start integrating into your
               application.
             </DialogDescription>
+            <button
+              onClick={handleCopy}
+              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center'>
+              Copy code
+              <ClipboardCopyIcon className='h-5 w-5 ml-2' />
+            </button>
             <div className='p-4 rounded bg-primary text-white my-2'>
               {codeToDisplay}
             </div>
